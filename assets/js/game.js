@@ -23,34 +23,40 @@ var fight = function (enemyName) {
                 console.log("playerMoney", playerMoney);
                 break;
             } // if yes, leave fight
-        }    
-            enemyHealth = enemyHealth - playerAttack;
-            console.log(
-                playerName + " attacked " + enemyName + ". " + enemyName + " still has " + enemyHealth + " health remaining."
-            );
-            if (enemyHealth <= 0) {
-                window.alert(enemyName + " has died!");
-                playerMoney = playerMoney + 20;
-                break;
-            } else {
-                window.alert(enemyName + " still has " + enemyHealth + " health left.");   
-            } //check enemy's health
-            playerHealth = playerHealth - enemyAttack;
-            console.log(
-                enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining."
-            ); //damage to player
-            if (playerHealth <= 0) {
-                window.alert(playerName + " has died!");
-                break;
-            } else {
-                window.alert(playerName + " still has " + playerHealth + " health left.");
-            } // check players's health
         }
-    };   
+        enemyHealth = enemyHealth - playerAttack;
+        console.log(
+            playerName + " attacked " + enemyName + ". " + enemyName + " still has " + enemyHealth + " health remaining."
+        );
+        if (enemyHealth <= 0) {
+            window.alert(enemyName + " has died!");
+            playerMoney = playerMoney + 20;
+            break;
+        } else {
+            window.alert(enemyName + " still has " + enemyHealth + " health left.");
+        } //check enemy's health
+        playerHealth = playerHealth - enemyAttack;
+        console.log(
+            enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining."
+        ); //damage to player
+        if (playerHealth <= 0) {
+            window.alert(playerName + " has died!");
+            break;
+        } else {
+            window.alert(playerName + " still has " + playerHealth + " health left.");
+        } // check players's health
+    }
+};
 for (var i = 0; i < enemyNames.length; i++) {
-    var pickedEnemyName = enemyNames[i];
-    enemyHealth = 50;
-    fight(pickedEnemyName);
+    if (playerHealth > 0) {
+        window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
+        var pickedEnemyName = enemyNames[i];
+        enemyHealth = 50;
+        fight(pickedEnemyName);
+    } else {
+        window.alert("You lost your robot in battle! GAME OVER!");
+        break;
+    }
 }
 
 console.log(playerName, playerHealth, playerAttack); // This log will keep track of player Name/health/Attack
