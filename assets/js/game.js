@@ -48,7 +48,7 @@ var fight = function() {
             window.alert(playerName + " still has " + playerHealth + " health left.");
         }
     } else if (promptFight === "skip" || promptFight === "SKIP" || promptFight === "Skip") {
-        var confirmSkip = windows.confirm("Are you sure you'd like to skip the battle?");
+        var confirmSkip = window.confirm("Are you sure you'd like to skip the battle?");
         if (confirmSkip) {
             window.alert(playerName + " has chosen to skip the fight! Goodbye!");
             playerMoney = playerMoney - 2;
