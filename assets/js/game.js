@@ -1,3 +1,8 @@
+// Game States
+// WIN - Player Defeats all the robots.
+//  * Fight all enemy robots
+//  * Defeat each enemy robot
+// LOSE - Player's health reaches zero or less.
 var playerName = window.prompt("What is your robot's name?");
 var playerHealth = 110;
 // check to see if the value of the playerHealth variable is greater then 0
@@ -10,12 +15,12 @@ var playerMoney = 10;
 // This log will keep track of player Name/health/Attack
 console.log(playerName, playerHealth, playerAttack);
 
-var enemyName = "Roborto";
+var enemyNames = ["Roborto", "Amy Android", "Robo Trumble"];
 var enemyHealth = 55;
 var enemyAttack = 14;
 
 // This log will keep track of enemy Name/health/attack
-console.log(enemyName, enemyHealth, enemyAttack);
+console.log(enemyNames, enemyHealth, enemyAttack);
 
 
 var fight = function() {
@@ -26,19 +31,19 @@ var fight = function() {
     if (promptFight === "fight" || promptFight === "FIGHT" || promptFight === "Fight") {
         enemyHealth = enemyHealth - playerAttack;
         console.log(
-            playerName + " attacked " + enemyName + ". " + enemyName + " still has " + enemyHealth + " health remaining."
+            playerName + " attacked " + enemyNames + ". " + enemyNames + " still has " + enemyHealth + " health remaining."
             );
         //check enemy's health
         if (enemyHealth <= 0) {
-            window.alert(enemyName + " has died!");
+            window.alert(enemyNames + " has died!");
         }
         else {
-            window.alert(enemyName + " still has " + enemyHealth + " health left.");
+            window.alert(enemyNames + " still has " + enemyHealth + " health left.");
         }
         //damage to player
         playerHealth = playerHealth - enemyAttack;
         console.log(
-            enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining."
+            enemyNames + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining."
             );
         // check players's health
         if (playerHealth <= 0) {
@@ -62,4 +67,4 @@ var fight = function() {
     }
 };
 
-fight();
+//fight();
