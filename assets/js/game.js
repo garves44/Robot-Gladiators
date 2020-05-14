@@ -59,6 +59,12 @@ var startGame = function () {
             var pickedEnemyName = enemyNames[i];
             enemyHealth = 50;
             fight(pickedEnemyName);
+            if (playerHealth > 0 && i < enemyNames.length - 1) {
+                var shopConfirm = window.confirm("The fight is over,visit the store before the next round?");
+                if (shopConfirm) {
+                    shop();
+                }
+            }
         } else {
             window.alert("You lost your robot in battle! GAME OVER!");
             break;
@@ -66,20 +72,53 @@ var startGame = function () {
     }
     endGame();
 };
-var endGame = function() {
+//SHOP FUNCTION
+var shop = function () {
+    var shopOptionPrompt = window.prompt(
+        "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the shop? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice."
+    );
+    switch (shopOptionPrompt) {
+        case "REFILL":
+        case "refill":
+            if (playerMoney >= 7) {
+                window.alert("Refilling player's health by 20 for $7.");
+                playerHealth = playerHealth + 20;
+                playerMoney = playerMoney - 7;
+            } else {
+                window.alert("You don't have enough money!");
+            }
+            break;
+        case "UPGRADE":
+        case "upgrade":
+            if (playerMoney >= 7) {
+                window.alert("Upgrading player's attack by 6 for $7.");
+                playerAttack = playerAttack + 6;
+                playerMoney = playerMoney - 7;
+            } else {
+                window.alert("You don't have enough money!");
+            }
+            break;
+                case "LEAVE":
+                case "leave":
+                window.alert("Leaving the shop.");
+            break;
+        default:
+            shop();
+            break;
+    }
+};
+var endGame = function () {
     window.alert("The game has now ended. Let's see how you did!");
     if (playerHealth > 0) {
         window.alert("Great job, you've survived the game! You now have a score of " + playerMoney + ".");
-    }
-    else {
+    } else {
         window.alert("Your final score was" + playerMoney + "!");
     }
     //play again 
     var playAgainConfirm = window.confirm("Would you like to play again?");
     if (playAgainConfirm) {
         startGame();
-    }
-    else{
+    } else {
         window.alert("Thank you for play Robot Gladiators! Come back soon!");
     }
 };
