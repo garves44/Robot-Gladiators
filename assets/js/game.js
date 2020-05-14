@@ -27,7 +27,7 @@ var fight = function (enemyName) {
         enemyHealth = enemyHealth - playerAttack;
         console.log(
             playerName + " attacked " + enemyName + ". " + enemyName + " still has " + enemyHealth + " health remaining."
-        );
+        ); //damage to enemy
         if (enemyHealth <= 0) {
             window.alert(enemyName + " has died!");
             playerMoney = playerMoney + 20;
@@ -46,18 +46,45 @@ var fight = function (enemyName) {
             window.alert(playerName + " still has " + playerHealth + " health left.");
         } // check players's health
     }
-};
-for (var i = 0; i < enemyNames.length; i++) {
-    if (playerHealth > 0) {
-        window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
-        var pickedEnemyName = enemyNames[i];
-        enemyHealth = 50;
-        fight(pickedEnemyName);
-    } else {
-        window.alert("You lost your robot in battle! GAME OVER!");
-        break;
-    }
 }
+//Starting Game Function
+var startGame = function () {
+    //reset player
+    playerHealth = 110;
+    playerAttack = 11;
+    playerMoney = 10;
+    for (var i = 0; i < enemyNames.length; i++) {
+        if (playerHealth > 0) {
+            window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
+            var pickedEnemyName = enemyNames[i];
+            enemyHealth = 50;
+            fight(pickedEnemyName);
+        } else {
+            window.alert("You lost your robot in battle! GAME OVER!");
+            break;
+        }
+    }
+    endGame();
+};
+var endGame = function() {
+    window.alert("The game has now ended. Let's see how you did!");
+    if (playerHealth > 0) {
+        window.alert("Great job, you've survived the game! You now have a score of " + playerMoney + ".");
+    }
+    else {
+        window.alert("Your final score was" + playerMoney + "!");
+    }
+    //play again 
+    var playAgainConfirm = window.confirm("Would you like to play again?");
+    if (playAgainConfirm) {
+        startGame();
+    }
+    else{
+        window.alert("Thank you for play Robot Gladiators! Come back soon!");
+    }
+};
+// Auto start when page loads
+startGame();
 
 console.log(playerName, playerHealth, playerAttack); // This log will keep track of player Name/health/Attack
 console.log(enemyNames, enemyHealth, enemyAttack); // This log will keep track of enemy Name/health/attack
