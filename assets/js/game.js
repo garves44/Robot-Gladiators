@@ -109,9 +109,18 @@ var endGame = function () {
         window.alert("Thank you for play Robot Gladiators! Come back soon!");
     }
 };
+//Player Name function
+var getPlayerName = function () {
+    var name = "";
+    while (name === "" || name === null){
+        name = prompt("What is your robot's name?");
+    }
+    console.log("Your robot's name is " + name);
+    return name;
+}
 //Player STATS
 var playerInfo = {
-    name: window.prompt("What is your robot's name?"),
+    name: getPlayerName(),
     health: 110,
     attack: 11,
     money: 10,
