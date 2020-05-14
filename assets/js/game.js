@@ -117,10 +117,16 @@ var shop = function () {
 //END GAME
 var endGame = function () {
     window.alert("The game has now ended. Let's see how you did!");
-    if (playerInfo.health > 0) {
-        window.alert("Great job, you've survived the game! You now have a score of " + playerInfo.money + ".");
+    var highScore = localStorage.getItem("highscore");
+    if (highScore === null) {
+        highScore = 0;
+    }
+    if (playerInfo.money > highScore) {
+        localStorage.setItem("highscore", playerInfo.money);
+        localStorage.setItem("name", playerInfo.name);
+        window.alert(playerInfo.name + " now has the highscore of " + playerInfo.money + "!");
     } else {
-        window.alert("Your final score was" + playerInfo.money + "!");
+        window.alert(playerInfo.name + " did not beat the highscore of " + highScore + ". Maybe next time!");
     }
     //play again 
     var playAgainConfirm = window.confirm("Would you like to play again?");
