@@ -5,17 +5,27 @@
 // LOSE - Player's health reaches zero or less.
 
 //FIGHT SEQUENCE
+var fightOrSkip = function () {
+    var promptFight = window.prompt("Would you like to fight or skip this battle? Enter 'fight' or 'skip' to choose.");
+    if (promptFight === "" || promptFight === null){
+        window.alert("You need to provide a valid answer. Please try again!");
+        return fightOrSkip();
+    }
+    promptFight = promptFight.toLowerCase();
+    if (promptFight === "skip") {
+        var confirmSkip = window.confirm("Are you sure you'd like to skip the battle?");
+        if (confirmSkip) {
+            window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
+            playerInfo.money = Math.max(0, playerInfo.money - 10);
+            return true;
+        }
+    }
+    return false;
+}
 var fight = function (enemy) {
     while (enemy.health > 0 && playerInfo.health > 0) {
-        var promptFight = window.prompt("Would you like to FIGHT or skip this battle? Enter 'FIGHT' or 'SKIP' to choose.");
-        if (promptFight === "skip" || promptFight === "SKIP" || promptFight === "Skip") {
-            var confirmSkip = window.confirm("Are you sure you'd like to skip the battle?"); // confirm user wants to skip battle
-            if (confirmSkip) {
-                window.alert(playerInfo.name + " has chosen to skip the fight! Goodbye!");
-                playerInfo.money = Math.max(0, playerInfo.money - 10);
-                console.log("playerInfo.money", playerInfo.money);
-                break;
-            } // if yes, leave fight
+        if (fightOrSkip()) {
+            break;
         }
         var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
         enemy.health = Math.max(0, enemy.health - damage);
@@ -53,7 +63,7 @@ var startGame = function () {
             pickedEnemyObj.health = randomNumber(40, 60);
             fight(pickedEnemyObj);
             if (playerInfo.health > 0 && i < enemyInfo.length - 1) {
-                var shopConfirm = window.confirm("The fight is over,visit the store before the next round?");
+                var shopConfirm = window.confirm("The fight is over, visit the store before the next round?");
                 if (shopConfirm) {
                     shop();
                 }
@@ -112,7 +122,7 @@ var endGame = function () {
 //Player Name function
 var getPlayerName = function () {
     var name = "";
-    while (name === "" || name === null){
+    while (name === "" || name === null) {
         name = prompt("What is your robot's name?");
     }
     console.log("Your robot's name is " + name);
